@@ -1,8 +1,10 @@
-import { FETCH_GENRES, FETCH_GENRE, DELETE_GENRE, ERRORS, RESET_ERRORS} from "./types";
+import { FETCH_GENRES, FETCH_GENRE, DELETE_GENRE, ERRORS, RESET_ERRORS, URL} from "./types";
 import axios from "axios";
 
+export const url = URL;
+
 export const fetchGenres = () => (dispatch) => {
-  axios.get("http://localhost:50569/api/genre").then((res) => {
+  axios.get(url +"/genre").then((res) => {
       dispatch({ type: FETCH_GENRES, payload: res.data });
       })
       .catch((error) => {
@@ -17,7 +19,7 @@ export const fetchGenres = () => (dispatch) => {
 };
 
 export const fetchGenre = (id) => (dispatch) => {
-  axios.get("http://localhost:50569/api/genre/"+id).then((res) => {
+  axios.get(url + "/genre/"+id).then((res) => {
       dispatch({ type: FETCH_GENRE, payload: res.data });
       })
       .catch((error) => {
@@ -32,7 +34,7 @@ export const fetchGenre = (id) => (dispatch) => {
 };
 
 export const addGenre = (name) => (dispatch) => {
-  axios.post("http://localhost:50569/api/genre", {name}).then((res) => {
+  axios.post(url + "/genre", {name}).then((res) => {
       window.location.href = "/genres";
       })
       .catch((error) => {
@@ -47,7 +49,7 @@ export const addGenre = (name) => (dispatch) => {
 };
 
 export const updateGenre = (id, name) => (dispatch) => {
-  axios.put("http://localhost:50569/api/genre/"+ id, {name}).then((res) => {
+  axios.put(url + "/genre/"+ id, {name}).then((res) => {
       window.location.href = "/genre/"+id;
       })
       .catch((error) => {
@@ -62,7 +64,7 @@ export const updateGenre = (id, name) => (dispatch) => {
 };
 
 export const removeGenre = (id, index) => (dispatch) => {
-  axios.delete("http://localhost:50569/api/genre/"+ id).then((res) => {
+  axios.delete(url + "/genre/"+ id).then((res) => {
       dispatch({ type: DELETE_GENRE, index: index });
       })
       .catch((error) => {

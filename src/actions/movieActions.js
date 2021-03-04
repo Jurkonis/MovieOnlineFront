@@ -1,8 +1,10 @@
 import { FETCH_MOVIES, FETCH_MOVIE, ADD_MOVIE, UPDATE_MOVIE, DELETE_MOVIE, REMOVE_GENRE_FROM_MOVIE, ERRORS, RESET_ERRORS} from "./types";
 import axios from "axios";
 
+export const url = "https://localhost:5001/api";
+
 export const fetchMovies = () => (dispatch) => {
-  axios.get("http://localhost:50569/api/movie").then((res) => {
+  axios.get(url + "/movie").then((res) => {
       dispatch({ type: FETCH_MOVIES, payload: res.data });
       })
       .catch((error) => {
@@ -17,7 +19,7 @@ export const fetchMovies = () => (dispatch) => {
 };
 
 export const fetchMovie = (id) => (dispatch) => {
-  axios.get("http://localhost:50569/api/movie/"+id).then((res) => {
+  axios.get(url + "/movie/"+id).then((res) => {
       dispatch({ type: FETCH_MOVIE, payload: res.data });
       })
       .catch((error) => {
@@ -32,10 +34,10 @@ export const fetchMovie = (id) => (dispatch) => {
 };
 
 export const addMovie = (name, description, releaseYear, actors, genres) => (dispatch) => {
-  axios.post("http://localhost:50569/api/movie", {name, description, actors, releaseYear }).then((res) => {
+  axios.post(url + "/movie", {name, description, actors, releaseYear }).then((res) => {
       dispatch({ type: ADD_MOVIE, movie: res.data });
       genres.map((genre, index) => (
-        axios.post("http://localhost:50569/api/movie/genre", {movieId: res.data.id, genreId:genre.id}).then((res2) => {
+        axios.post(url + "/movie/genre", {movieId: res.data.id, genreId:genre.id}).then((res2) => {
         }).catch((error2) => {
           if (error2.response) {
             console.log(error2.response.data);
@@ -60,10 +62,10 @@ export const addMovie = (name, description, releaseYear, actors, genres) => (dis
 };
 
 export const updateMovie = (id, name, description, releaseYear, actors, genres) => (dispatch) => {
-  axios.put("http://localhost:50569/api/movie/"+ id, {name, description, releaseYear, actors}).then((res) => {
+  axios.put(url + "/movie/"+ id, {name, description, releaseYear, actors}).then((res) => {
       dispatch({ type: UPDATE_MOVIE, payload: res.data });
         genres.map((genre, index) => (
-          axios.post("http://localhost:50569/api/movie/genre", {movieId: res.data.id, genreId:genre.id}).then((res2) => {
+          axios.post(url + "/movie/genre", {movieId: res.data.id, genreId:genre.id}).then((res2) => {
             console.log(res2.data);
           }).catch((error2) => {
             if (error2.response) {
@@ -89,7 +91,7 @@ export const updateMovie = (id, name, description, releaseYear, actors, genres) 
 };
 
 export const removeMovie = (id, index) => (dispatch) => {
-  axios.delete("http://localhost:50569/api/movie/"+ id).then((res) => {
+  axios.delete(url + "/movie/"+ id).then((res) => {
       dispatch({ type: DELETE_MOVIE, index: index });
       })
       .catch((error) => {
@@ -104,7 +106,7 @@ export const removeMovie = (id, index) => (dispatch) => {
 };
 
 export const removeGenre = (id, movieId, index) => (dispatch) => {
-  axios.delete("http://localhost:50569/api/movie/genre/"+ id).then((res) => {
+  axios.delete(url + "/movie/genre/"+ id).then((res) => {
       dispatch({ type: REMOVE_GENRE_FROM_MOVIE, index: index });
       window.location.href = "/movie/"+movieId;
       })

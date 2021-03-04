@@ -14,11 +14,17 @@ class Genre extends Component {
     return (
         <div className="genre">
             <Link  className="nav-link" to={`/genre/${this.props.genre.id}`}>
-                <h2>{this.props.genre.name}</h2>
+                <h2 className="genre-name">{this.props.genre.name}</h2>
             </Link>
-            <div className="movie-list">
-                {movies}
+            {this.props.genre.genreMovies.length === 0 ?( 
+            <div className="empty-list">
+              No movies assigned
             </div>
+          ):(
+            <div className="movie-list">
+              {movies}
+            </div>
+          )}
         </div>
     );
   }

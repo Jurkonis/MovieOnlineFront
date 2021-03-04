@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { } from "../../actions/movieActions.js";
-// import PropTypes from "prop-types";
+import { url } from "../../actions/movieActions.js";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ class Movie extends Component {
     };
 
     componentDidMount(){
-    axios.get("http://localhost:50569/api/movie/"+this.props.id).then((res) => {
+    axios.get(this.props.url + "/movie/"+this.props.id).then((res) => {
         let { movie } = this.state;
         movie = res.data;
         this.setState({ movie });
@@ -56,9 +56,9 @@ class Movie extends Component {
 }
 
 Movie.propTypes = {  
-
+ url: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({ url });
 
-export default connect(mapStateToProps, { })(Movie);
+export default connect(mapStateToProps, { url })(Movie);

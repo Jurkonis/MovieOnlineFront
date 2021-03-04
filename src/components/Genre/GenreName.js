@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeGenre } from "../../actions/movieActions.js";
+import { removeGenre, url } from "../../actions/movieActions.js";
 import PropTypes from "prop-types";
 import { Icon } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ class GenreName extends Component {
     };
 
     componentDidMount(){
-    axios.get("http://localhost:50569/api/genre/"+this.props.genreId).then((res) => {
+    axios.get(this.props.url + "/genre/"+this.props.genreId).then((res) => {
         let { genre } = this.state;
         genre = res.data;
         this.setState({ genre });
@@ -53,8 +53,9 @@ class GenreName extends Component {
 
 GenreName.propTypes = {  
     removeGenre: PropTypes.func.isRequired,
+    url: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({url});
 
-export default connect(mapStateToProps, { removeGenre })(GenreName);
+export default connect(mapStateToProps, { removeGenre, url })(GenreName);

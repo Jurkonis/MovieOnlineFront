@@ -137,3 +137,8 @@ body {
 .btns {
   margin-left: 10px;
 }
+
+.empty-list {
+  color: white;
+  padding: 10px;
+}
