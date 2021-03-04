@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## How to run project:
 
-- Open your terminal and then type `git clone`
+- Open your terminal and then type `git clone https://github.com/Jurkonis/MovieOnlineFront.git`
 - `cd` into the new folder and type `npm install`
 - To run the React project type `npm start`
 
