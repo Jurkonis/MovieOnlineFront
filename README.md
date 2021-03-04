@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Back-end for this app can be found at [https://github.com/Jurkonis/MovieOnlineAPI](https://github.com/Jurkonis/MovieOnlineAPI)
+
 ## How to run project:
 
 - Open your terminal and then type `git clone https://github.com/Jurkonis/MovieOnlineFront.git`
