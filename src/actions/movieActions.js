@@ -1,7 +1,7 @@
-import { FETCH_MOVIES, FETCH_MOVIE, ADD_MOVIE, UPDATE_MOVIE, DELETE_MOVIE, REMOVE_GENRE_FROM_MOVIE, ERRORS, RESET_ERRORS} from "./types";
+import { FETCH_MOVIES, FETCH_MOVIE, ADD_MOVIE, UPDATE_MOVIE, DELETE_MOVIE, REMOVE_GENRE_FROM_MOVIE, ERRORS, RESET_ERRORS, URL} from "./types";
 import axios from "axios";
 
-export const url = "https://localhost:5001/api";
+export const url = URL;
 
 export const fetchMovies = () => (dispatch) => {
   axios.get(url + "/movie").then((res) => {
