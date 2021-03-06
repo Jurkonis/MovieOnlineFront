@@ -1,9 +1,9 @@
-import { FETCH_GENRES, FETCH_GENRE, ADD_GENRE, UPDATE_GENRE, DELETE_GENRE, ERRORS, RESET_ERRORS, UPDATE_MODAL, DELETE_MODAL, ERROR} from "../actions/types";
+import { FETCH_ACTORS, FETCH_ACTOR, ADD_ACTOR, UPDATE_ACTOR, DELETE_ACTOR, ERRORS, RESET_ERRORS, UPDATE_MODAL, DELETE_MODAL, ERROR} from "../actions/types";
 
 const initialState = {
-  genres: [],
-  genre: {},
-  genreMovies :[],
+  actors: [],
+  actor: {},
+  actorMovies :[],
   errors:{},
   error:'',
   modal: false,
@@ -12,32 +12,32 @@ const initialState = {
 
 export default function smiley(state = initialState, action) {
   switch (action.type) {
-    case FETCH_GENRES:
+    case FETCH_ACTORS:
       return {
         ...state,
-        genres: action.payload,
+        actors: action.payload,
       };
-      case FETCH_GENRE:
+      case FETCH_ACTOR:
       return {
         ...state,
-        genre: action.payload,
+        actor: action.payload,
         error:'',
-        genreMovies: action.payload.genreMovies,
+        actorMovies: action.payload.actorMovies,
       };
-      case UPDATE_GENRE:
+      case UPDATE_ACTOR:
       return {
         ...state,
-        genre: action.payload,
+        actor: action.payload,
       };
-      case ADD_GENRE:
+      case ADD_ACTOR:
       return {
         ...state,
-        genres: state.genres.concat(action.genre)
+        actors: state.actors.concat(action.actor)
       };
-      case DELETE_GENRE:
+      case DELETE_ACTOR:
       return {
         ...state,
-        genres: state.genres.filter((item, index) => index !== action.index),
+        actors: state.actors.filter((item, index) => index !== action.index),
       };
       case ERRORS:
       return {

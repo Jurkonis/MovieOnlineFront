@@ -1,11 +1,11 @@
-import { FETCH_GENRES, FETCH_GENRE, ADD_GENRE, UPDATE_GENRE, DELETE_GENRE, ERRORS, RESET_ERRORS, URL, UPDATE_MODAL, DELETE_MODAL, ERROR} from "./types";
+import { FETCH_ACTORS, FETCH_ACTOR, ADD_ACTOR, UPDATE_ACTOR, DELETE_ACTOR, ERRORS, RESET_ERRORS, URL, UPDATE_MODAL, DELETE_MODAL, ERROR} from "./types";
 import axios from "axios";
 
 export const url = URL;
 
-export const fetchGenres = () => (dispatch) => {
-  axios.get(url +"/genre").then((res) => {
-      dispatch({ type: FETCH_GENRES, payload: res.data });
+export const fetchActors = () => (dispatch) => {
+  axios.get(url +"/actor").then((res) => {
+      dispatch({ type: FETCH_ACTORS, payload: res.data });
       })
       .catch((error) => {
         if (error.response) {
@@ -18,9 +18,9 @@ export const fetchGenres = () => (dispatch) => {
       });
 };
 
-export const fetchLeftGenres = (genres) => (dispatch) => {
-  axios.post(url +"/genre/left", genres).then((res) => {
-      dispatch({ type: FETCH_GENRES, payload: res.data });
+export const fetchLeftActors = (actors) => (dispatch) => {
+  axios.post(url +"/actor/left", actors).then((res) => {
+      dispatch({ type: FETCH_ACTORS, payload: res.data });
       })
       .catch((error) => {
         if (error.response) {
@@ -33,9 +33,9 @@ export const fetchLeftGenres = (genres) => (dispatch) => {
       });
 };
 
-export const fetchGenre = (id) => (dispatch) => {
-  axios.get(url + "/genre/"+id).then((res) => {
-      dispatch({ type: FETCH_GENRE, payload: res.data });
+export const fetchActor = (id) => (dispatch) => {
+  axios.get(url + "/actor/"+id).then((res) => {
+      dispatch({ type: FETCH_ACTOR, payload: res.data });
       })
       .catch((error) => {
         if (error.response) {
@@ -48,9 +48,9 @@ export const fetchGenre = (id) => (dispatch) => {
       });
 };
 
-export const addGenre = (name) => (dispatch) => {
-  axios.post(url + "/genre", {name}).then((res) => {
-    dispatch({ type: ADD_GENRE, genre: res.data });
+export const addActor = (firstName, lastName) => (dispatch) => {
+  axios.post(url + "/actor", {firstName, lastName}).then((res) => {
+    dispatch({ type: ADD_ACTOR, actor: res.data });
     dispatch({ type: UPDATE_MODAL, bool: false });
       })
       .catch((error) => {
@@ -59,7 +59,7 @@ export const addGenre = (name) => (dispatch) => {
             dispatch({ type: ERRORS, payload: error.response.data.errors });
             dispatch({ type: ERROR, payload: '' });
           }else{
-            dispatch({ type: ERROR, payload: error.response.data+ ": " + name });
+            dispatch({ type: ERROR, payload: error.response.data+ ": " + firstName + " " + lastName });
             dispatch({ type: ERRORS, payload: {} });
           }
         } else if (error.request) {
@@ -70,9 +70,13 @@ export const addGenre = (name) => (dispatch) => {
       });
 };
 
-export const updateGenre = (id, name) => (dispatch) => {
-  axios.put(url + "/genre/"+ id, {name}).then((res) => {
-    dispatch({ type: UPDATE_GENRE, payload: res.data });
+export const addActorToState = (actor) => (dispatch) => {
+    dispatch({ type: ADD_ACTOR, actor: actor });
+};
+
+export const updateActor = (id, firstName, lastName) => (dispatch) => {
+  axios.put(url + "/actor/"+ id, {firstName, lastName}).then((res) => {
+    dispatch({ type: UPDATE_ACTOR, payload: res.data });
     dispatch({ type: UPDATE_MODAL, bool: false });
       })
       .catch((error) => {
@@ -86,9 +90,9 @@ export const updateGenre = (id, name) => (dispatch) => {
       });
 };
 
-export const removeGenre = (id, index) => (dispatch) => {
-  axios.delete(url + "/genre/"+ id).then((res) => {
-      dispatch({ type: DELETE_GENRE, index: index });
+export const removeActor = (id, index) => (dispatch) => {
+  axios.delete(url + "/actor/"+ id).then((res) => {
+      dispatch({ type: DELETE_ACTOR, index: index });
       })
       .catch((error) => {
         if (error.response) {

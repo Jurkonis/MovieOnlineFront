@@ -142,3 +142,11 @@ body {
   color: white;
   padding: 10px;
 }
+
+.create-actor {
+  padding-top: 30px;
+}
+
+.error {
+  color: white;
+}

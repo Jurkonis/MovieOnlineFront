@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeGenre, url } from "../../actions/movieActions.js";
+import { removeActor, url } from "../../actions/movieActions.js";
 import PropTypes from "prop-types";
 import { Icon } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-class GenreName extends Component {
+class ActorName extends Component {
 
     state = {
-        open: false,
-        genre:{},
+        actor:{},
     };
 
     componentDidMount(){
-    axios.get(this.props.url + "/genre/"+this.props.genreId).then((res) => {
-        let { genre } = this.state;
-        genre = res.data;
-        this.setState({ genre });
+    axios.get(this.props.url + "/actor/"+this.props.actorId).then((res) => {
+        let { actor } = this.state;
+        actor = res.data;
+        this.setState({ actor });
       })
       .catch((error) => {
         if (error.response) {
@@ -31,16 +30,16 @@ class GenreName extends Component {
     }
 
     handleDelete(e){
-        this.props.removeGenre(this.props.id, this.props.index);
+        this.props.removeActor(this.props.id, this.props.index);
     }
 
   render() {
 
     return (
         <div className="flex">
-            <Link className="nav-link" to={`/genre/${this.props.genreId}`}>
+            <Link className="nav-link" to={`/actor/${this.props.actorId}`}>
                 <div className="genre-name">
-                    {this.state.genre.name}
+                    {this.state.actor.firstName} {this.state.actor.lastName}
                 </div>
             </Link>
             <div className="cursor" onClick={this.handleDelete.bind(this)}>
@@ -51,11 +50,11 @@ class GenreName extends Component {
   }
 }
 
-GenreName.propTypes = {  
-    removeGenre: PropTypes.func.isRequired,
+ActorName.propTypes = {  
+    removeActor: PropTypes.func.isRequired,
     url: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({url});
 
-export default connect(mapStateToProps, { removeGenre, url })(GenreName);
+export default connect(mapStateToProps, { removeActor, url })(ActorName);

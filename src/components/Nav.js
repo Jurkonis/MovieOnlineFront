@@ -12,7 +12,8 @@ class Nav extends Component {
     activeItem: "home",
     loading: false,
     results: [],
-    value: ''
+    value: '',
+    newvalue: ''
    }
 
    componentDidMount() {
@@ -22,22 +23,27 @@ class Nav extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   handleSearchChange = (e, { value }) => this.setState({ results: _.filter(this.props.movies,movie=>{  
-  if (movie.name.toLowerCase().includes(value))  {
-
+  if (movie.name.toLowerCase().includes(value) || movie.releaseYear.toString().includes(value))  {
       return true
   }else {
       return false
   }
  }), value: value })
 
+ handlenewSearchChange = (e, { value }) => this.setState({newvalue: value })
+
  handleClick = (e, data) => {
   window.location.href = "/movie/" + data.result.id;
+ };
+
+ handleSearchClick = (e) => {
+  console.log(this.state.newvalue);
  };
 
   render() {
     const { activeItem } = this.state
 
-    const resultRenderer = ({ name }) => <Label content={name} />
+    const resultRenderer = ({ name, releaseYear }) => <Label content={releaseYear + " " + name} />
 
     return (
       <Segment inverted>
@@ -55,6 +61,14 @@ class Nav extends Component {
             to='/genres'
             name='genres'
             active={activeItem === 'genres'}
+            onClick={this.handleItemClick}
+          >
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to='/actors'
+            name='actors'
+            active={activeItem === 'actors'}
             onClick={this.handleItemClick}
           >
           </Menu.Item>

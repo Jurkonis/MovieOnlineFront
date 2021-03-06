@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 class Movie extends Component {
 
     state = {
-        open: false,
         movie:{},
     };
 
